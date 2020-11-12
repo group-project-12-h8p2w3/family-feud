@@ -14,123 +14,11 @@
               <div class="align-self-center">
                 <h1>Players</h1>
                 <div class="player-container scrollable d-flex flex-wrap">
-                  <div class="card player-card">
+                  <div v-for="(user, i) in users" :key="i" class="card player-card">
                     <div class="card-body d-flex flex-column justify-content-center">
                       <div class="align-self-center">
-                        <img class="user-avatar" src="https://avatars.dicebear.com/api/bottts/test.svg" alt="">
-                        <h5 class="username-card">username</h5>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card player-card">
-                    <div class="card-body d-flex flex-column justify-content-center">
-                      <div class="align-self-center">
-                        <img class="user-avatar" src="https://avatars.dicebear.com/api/bottts/test2.svg" alt="">
-                        <h5 class="username-card">username</h5>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card player-card">
-                    <div class="card-body d-flex flex-column justify-content-center">
-                      <div class="align-self-center">
-                        <img class="user-avatar" src="https://avatars.dicebear.com/api/bottts/test3.svg" alt="">
-                        <h5 class="username-card">username</h5>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card player-card">
-                    <div class="card-body d-flex flex-column justify-content-center">
-                      <div class="align-self-center">
-                        <img class="user-avatar" src="https://avatars.dicebear.com/api/bottts/test4.svg" alt="">
-                        <h5 class="username-card">username</h5>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card player-card">
-                    <div class="card-body d-flex flex-column justify-content-center">
-                      <div class="align-self-center">
-                        <img class="user-avatar" src="https://avatars.dicebear.com/api/bottts/test5.svg" alt="">
-                        <h5 class="username-card">username</h5>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card player-card">
-                    <div class="card-body d-flex flex-column justify-content-center">
-                      <div class="align-self-center">
-                        <img class="user-avatar" src="https://avatars.dicebear.com/api/bottts/test6.svg" alt="">
-                        <h5 class="username-card">username</h5>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card player-card">
-                    <div class="card-body d-flex flex-column justify-content-center">
-                      <div class="align-self-center">
-                        <img class="user-avatar" src="https://avatars.dicebear.com/api/bottts/test7.svg" alt="">
-                        <h5 class="username-card">username</h5>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card player-card">
-                    <div class="card-body d-flex flex-column justify-content-center">
-                      <div class="align-self-center">
-                        <img class="user-avatar" src="https://avatars.dicebear.com/api/bottts/test8.svg" alt="">
-                        <h5 class="username-card">username</h5>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card player-card">
-                    <div class="card-body d-flex flex-column justify-content-center">
-                      <div class="align-self-center">
-                        <img class="user-avatar" src="https://avatars.dicebear.com/api/bottts/test9.svg" alt="">
-                        <h5 class="username-card">username</h5>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card player-card">
-                    <div class="card-body d-flex flex-column justify-content-center">
-                      <div class="align-self-center">
-                        <img class="user-avatar" src="https://avatars.dicebear.com/api/bottts/test10.svg" alt="">
-                        <h5 class="username-card">username</h5>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card player-card">
-                    <div class="card-body d-flex flex-column justify-content-center">
-                      <div class="align-self-center">
-                        <img class="user-avatar" src="https://avatars.dicebear.com/api/bottts/test.svg" alt="">
-                        <h5 class="username-card">username</h5>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card player-card">
-                    <div class="card-body d-flex flex-column justify-content-center">
-                      <div class="align-self-center">
-                        <img class="user-avatar" src="https://avatars.dicebear.com/api/bottts/test2.svg" alt="">
-                        <h5 class="username-card">username</h5>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card player-card">
-                    <div class="card-body d-flex flex-column justify-content-center">
-                      <div class="align-self-center">
-                        <img class="user-avatar" src="https://avatars.dicebear.com/api/bottts/test3.svg" alt="">
-                        <h5 class="username-card">username</h5>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card player-card">
-                    <div class="card-body d-flex flex-column justify-content-center">
-                      <div class="align-self-center">
-                        <img class="user-avatar" src="https://avatars.dicebear.com/api/bottts/test4.svg" alt="">
-                        <h5 class="username-card">username</h5>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card player-card">
-                    <div class="card-body d-flex flex-column justify-content-center">
-                      <div class="align-self-center">
-                        <img class="user-avatar" src="https://avatars.dicebear.com/api/bottts/test5.svg" alt="">
-                        <h5 class="username-card">username</h5>
+                        <img class="user-avatar" :src="`https://avatars.dicebear.com/api/bottts/${user}.svg`" alt="">
+                        <h5 class="username-card">{{ user }}</h5>
                       </div>
                     </div>
                   </div>
@@ -156,7 +44,12 @@ export default {
   },
   methods: {
     play () {
-      this.$router.push('/gameplay')
+      this.$socket.emit('enterGame')
+    }
+  },
+  computed: {
+    users () {
+      return this.$store.state.users
     }
   }
 }
