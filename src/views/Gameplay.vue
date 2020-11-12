@@ -11,7 +11,7 @@
               Question
             </div>
             <div class="card-body">
-              <h5 class="card-title">Username</h5>
+              <h5 class="card-title">{{ user }}</h5>
               <hr>
               <div id="userScoreBoard">
                 User score:
@@ -102,7 +102,7 @@
               <h5 class="card-title">Card title</h5>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
               <div class="input-group mb-3">
-                  <input type="text" class="form-control" placeholder="Your answer..." aria-label="Recipient's username" aria-describedby="button-addon2">
+                  <input v-model="message" type="text" class="form-control" placeholder="Your answer..." aria-label="Recipient's username" aria-describedby="button-addon2">
                   <div class="input-group-append">
                     <button class="btn btn-outline-secondary" type="button" id="button-addon2">Submit</button>
                   </div>
@@ -118,13 +118,40 @@
 <script>
 export default {
   name: 'Gameplay',
+  data () {
+    return {
+      message: ''
+    }
+  },
   methods: {
     gameStart () {
+      this.$socket.emit('fetchQuestion')
+      this.$socket.emit('fetchAnswer')
+    },
+    sendMessage () {
+      const data = {
+        user: localStorage.getItem('user'),
+        message: this.message
+      }
+      this.$socket.emit('sendMessage', data)
+      this.message = ''
     }
   },
   computed: {
     question () {
-      return this.$store.state.question
+      return this.$store.state.questions
+    },
+    answer () {
+      return this.$store.state.answers
+    },
+    userList () {
+      return this.$store.state.users
+    },
+    messages () {
+      return this.$store.state.messages
+    },
+    user () {
+      return this.$store.state.user
     }
   }
 }
