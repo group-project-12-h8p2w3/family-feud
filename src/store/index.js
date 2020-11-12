@@ -5,7 +5,6 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    question: 'Benda apa yang disukai seorang anak kecil?',
     user: '',
     users: [],
     questions: [],
@@ -18,15 +17,12 @@ export default new Vuex.Store({
       state.users = data
     },
     SOCKET_questionsList (state, data) {
-      state.questions = data
-    },
-    SOCKET_answersList (state, data) {
-      state.answers = data
+      state.answers = data.answer
+      state.questions = data.question
     },
     SOCKET_messages (state, data) {
       state.messages = data
     }
-
   },
   actions: {
 

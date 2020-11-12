@@ -5,45 +5,6 @@
     </nav>
     <div class="container-fluid">
       <div class="row justify-content-center">
-        <!-- User Board -->
-        <!-- <div class="col-2">
-          <div class="card shadow">
-            <div class="card-header">
-              Users
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">{{ user }}</h5>
-              <hr>
-              <div id="userScoreBoard">
-                User score:
-                <h3>50</h3>
-              </div>
-              <hr>
-              <div id="otherPlayers">
-                <table class="table table-bordered" style="font-size: 0.8em;">
-                  <col style="width: 8em;" />
-                  <col style="width: 1em;" />
-                  <col style="width: 1em;" />
-                  <tr>
-                    <td>Player 1</td>
-                    <td>:</td>
-                    <td>23</td>
-                  </tr>
-                  <tr>
-                    <td>Player 2</td>
-                    <td>:</td>
-                    <td>15</td>
-                  </tr>
-                  <tr>
-                    <td>Player 3</td>
-                    <td>:</td>
-                    <td>21</td>
-                  </tr>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div> -->
         <div class="col-7">
           <div class="card shadow">
             <div class="card-header">
@@ -82,13 +43,9 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>Dot</td>
-                      <td>23</td>
-                    </tr>
-                    <tr>
-                      <td>Bola</td>
-                      <td>12</td>
+                    <tr v-for="el in answer" :key="el.id">
+                      <td>{{ el.answer }}</td>
+                      <td>{{ el.point }}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -107,7 +64,7 @@
         <div class="col-3">
           <div class="card shadow">
             <div class="card-header">
-              Chat
+              <h5 class="card-title">{{ user }}</h5>
             </div>
             <div class="card-body">
               <div>
@@ -177,14 +134,13 @@ export default {
   name: 'Gameplay',
   data () {
     return {
-      message: ''
+      message: '',
       isGameStarted: false
     }
   },
   methods: {
     gameStart () {
       this.$socket.emit('fetchQuestion')
-      this.$socket.emit('fetchAnswer')
     },
     sendMessage () {
       const data = {
@@ -199,9 +155,6 @@ export default {
     question () {
       return this.$store.state.questions
     },
-    answer () {
-      return this.$store.state.answers
-    },
     userList () {
       return this.$store.state.users
     },
@@ -210,6 +163,9 @@ export default {
     },
     user () {
       return this.$store.state.user
+    },
+    answer () {
+      return this.$store.state.answers
     }
   }
 }
