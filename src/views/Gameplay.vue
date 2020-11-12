@@ -53,9 +53,15 @@
               </div>
               <!-- Answer Input -->
               <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Your answer..." aria-label="Recipient's username" aria-describedby="button-addon2">
+                <input
+                @submit="inputAnswer"
+                v-model="inputanswer"
+                type="text" class="form-control"
+                placeholder="Your answer..."
+                aria-label="Recipient's username"
+                aria-describedby="button-addon2">
                 <div class="input-group-append">
-                  <button class="btn btn-outline-secondary" type="button" id="button-addon2">Submit</button>
+                  <button @click.prevent="inputAnswer" class="btn btn-outline-secondary" type="button" id="button-addon2">Submit</button>
                 </div>
               </div>
             </div>
@@ -78,20 +84,10 @@
                   <col style="width: 8em;" />
                   <col style="width: 1em;" />
                   <col style="width: 1em;" />
-                  <tr>
-                    <td>Player 1</td>
+                  <tr v-for="(user, i) in usersPlaying" :key="i">
+                    <td>{{ user.username }}</td>
                     <td>:</td>
-                    <td>23</td>
-                  </tr>
-                  <tr>
-                    <td>Player 2</td>
-                    <td>:</td>
-                    <td>15</td>
-                  </tr>
-                  <tr>
-                    <td>Player 3</td>
-                    <td>:</td>
-                    <td>21</td>
+                    <td>{{ user.score }}</td>
                   </tr>
                 </table>
               </div>
@@ -135,7 +131,8 @@ export default {
   data () {
     return {
       message: '',
-      isGameStarted: false
+      isGameStarted: false,
+      inputanswer: ''
     }
   },
   methods: {
@@ -149,14 +146,24 @@ export default {
       }
       this.$socket.emit('sendMessage', data)
       this.message = ''
+    },
+    inputAnswer () {
+      const user = localStorage.getItem('user')
+      const answer = this.inputanswer
+      const data = {
+        user, answer
+      }
+      this.$socket.emit('compareAnswer', data)
+      this.inputanswer = ''
     }
   },
   computed: {
+    usersPlaying () {
+      // ambil score semua user
+      return this.$store.state.scores
+    },
     question () {
       return this.$store.state.questions
-    },
-    userList () {
-      return this.$store.state.users
     },
     messages () {
       return this.$store.state.messages
@@ -165,7 +172,7 @@ export default {
       return this.$store.state.user
     },
     answer () {
-      return this.$store.state.answers
+      return this.$store.state.answered
     }
   }
 }
