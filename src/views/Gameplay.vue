@@ -12,7 +12,7 @@
               Users
             </div>
             <div class="card-body">
-              <h5 class="card-title">Username</h5>
+              <h5 class="card-title">{{ user }}</h5>
               <hr>
               <div id="userScoreBoard">
                 User score:
@@ -177,16 +177,39 @@ export default {
   name: 'Gameplay',
   data () {
     return {
+      message: ''
       isGameStarted: false
     }
   },
   methods: {
     gameStart () {
+      this.$socket.emit('fetchQuestion')
+      this.$socket.emit('fetchAnswer')
+    },
+    sendMessage () {
+      const data = {
+        user: localStorage.getItem('user'),
+        message: this.message
+      }
+      this.$socket.emit('sendMessage', data)
+      this.message = ''
     }
   },
   computed: {
     question () {
-      return this.$store.state.question
+      return this.$store.state.questions
+    },
+    answer () {
+      return this.$store.state.answers
+    },
+    userList () {
+      return this.$store.state.users
+    },
+    messages () {
+      return this.$store.state.messages
+    },
+    user () {
+      return this.$store.state.user
     }
   }
 }

@@ -28,6 +28,8 @@ export default {
   },
   methods: {
     login () {
+      localStorage.setItem('user', this.username)
+      this.$socket.emit('login', this.username)
       this.$router.push('/rooms')
     }
   }
