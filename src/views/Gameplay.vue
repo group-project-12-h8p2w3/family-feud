@@ -1,14 +1,15 @@
 <template>
   <div class="gameplay">
-    <!-- <nav class="navbar navbar-light bg-light">
-      <span class="navbar-brand mb-0 h1">Navbar</span>
-    </nav> -->
+    <nav class="navbar navbar-light bg-light">
+      <span class="navbar-brand mb-0 h1">Family-feud</span>
+    </nav>
     <div class="container-fluid">
-      <div class="row ">
-        <div class="col-2">
+      <div class="row justify-content-center">
+        <!-- User Board -->
+        <!-- <div class="col-2">
           <div class="card shadow">
             <div class="card-header">
-              Question
+              Users
             </div>
             <div class="card-body">
               <h5 class="card-title">Username</h5>
@@ -19,29 +20,42 @@
               </div>
               <hr>
               <div id="otherPlayers">
-                <div>
-                  Player 1: 43
-                </div>
-                <div>
-                  Player 2: 12
-                </div>
-                <div>
-                  Player 3: 65
-                </div>
-                <div>
-                  Player 4: 18
-                </div>
+                <table class="table table-bordered" style="font-size: 0.8em;">
+                  <col style="width: 8em;" />
+                  <col style="width: 1em;" />
+                  <col style="width: 1em;" />
+                  <tr>
+                    <td>Player 1</td>
+                    <td>:</td>
+                    <td>23</td>
+                  </tr>
+                  <tr>
+                    <td>Player 2</td>
+                    <td>:</td>
+                    <td>15</td>
+                  </tr>
+                  <tr>
+                    <td>Player 3</td>
+                    <td>:</td>
+                    <td>21</td>
+                  </tr>
+                </table>
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
         <div class="col-7">
           <div class="card shadow">
             <div class="card-header">
               Gameboard
             </div>
             <div class="card-body">
-              <button @click.prevent="gameStart" type="button" class="btn btn-info">Trigger Start Play</button>
+              <!-- Trigger Play Button -->
+              <div id="btn-trigger-play">
+                <button @click.prevent="gameStart" type="button" class="btn btn-info">Trigger Start Play</button>
+                <hr>
+              </div>
+              <!-- Timer -->
               <div id="timer-gameplay">
                 <div>
                   Timer:
@@ -49,45 +63,42 @@
                 <div>
                   50
                 </div>
-              </div>
-              <div id="answer" style="width: 18rem;">
-                <div id="answer-list">
-                  <div class="row">
-                    <div class="col-6 border">
-                      <div class="badge badge-secondary">Secondary</div>
-                    </div>
-                    <div class="col-6 border">
-                      <div class="badge badge-secondary">23</div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-6 border">
-                      <div class="badge badge-secondary">Secondary</div>
-                    </div>
-                    <div class="col-6 border">
-                      <div class="badge badge-secondary">23</div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-6 border">
-                      <div class="badge badge-secondary">Secondary</div>
-                    </div>
-                    <div class="col-6 border">
-                      <div class="badge badge-secondary">23</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <div >
-                  <h3>{{ question }}</h3>
-                </div>
                 <hr>
-                <div class="input-group mb-3">
-                  <input type="text" class="form-control" placeholder="Your answer..." aria-label="Recipient's username" aria-describedby="button-addon2">
-                  <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" id="button-addon2">Submit</button>
-                  </div>
+              </div>
+              <!-- Question -->
+              <div id="question">
+                <p>Question:</p>
+                <h3>{{ question }}</h3>
+                <hr>
+              </div>
+              <!-- Answer list -->
+              <div class="" id="answer">
+                <table class="table table-bordered" style="margin: auto; width: 50%;">
+                  <col style="width: 8em;" />
+                  <col style="width: 1em;" />
+                  <thead>
+                    <tr>
+                      <th colspan="2">Answers</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Dot</td>
+                      <td>23</td>
+                    </tr>
+                    <tr>
+                      <td>Bola</td>
+                      <td>12</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <hr>
+              </div>
+              <!-- Answer Input -->
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Your answer..." aria-label="Recipient's username" aria-describedby="button-addon2">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary" type="button" id="button-addon2">Submit</button>
                 </div>
               </div>
             </div>
@@ -99,14 +110,60 @@
               Chat
             </div>
             <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <div class="input-group mb-3">
-                  <input type="text" class="form-control" placeholder="Your answer..." aria-label="Recipient's username" aria-describedby="button-addon2">
-                  <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" id="button-addon2">Submit</button>
-                  </div>
+              <div>
+                <div id="userScoreBoard">
+                User score:
+                <h3>50</h3>
+              </div>
+              <hr>
+              <div id="otherPlayers">
+                <table class="table table-bordered" style="font-size: 0.8em;">
+                  <col style="width: 8em;" />
+                  <col style="width: 1em;" />
+                  <col style="width: 1em;" />
+                  <tr>
+                    <td>Player 1</td>
+                    <td>:</td>
+                    <td>23</td>
+                  </tr>
+                  <tr>
+                    <td>Player 2</td>
+                    <td>:</td>
+                    <td>15</td>
+                  </tr>
+                  <tr>
+                    <td>Player 3</td>
+                    <td>:</td>
+                    <td>21</td>
+                  </tr>
+                </table>
+              </div>
+              </div>
+              <!-- chat board -->
+              <div class="border p-2 text-left" id="message-board" style="overflow: auto;  height: 20vh;">
+                <div>Siapa: hai guys</div>
+                <div>Siapa: hai guys</div>
+                <div>Siapa: hai guys</div>
+                <div>Siapa: hai guys</div>
+                <div>Siapa: hai guys</div>
+                <div>Siapa: hai guys</div>
+                <div>Siapa: hai guys</div>
+                <div>Siapa: hai guys</div>
+                <div>Siapa: hai guys</div>
+                <div>Siapa: hai guys</div>
+                <div>Siapa: hai guys</div>
+                <div>Siapa: hai guys</div>
+                <div>Siapa: hai guys</div>
+                <div>Siapa: hai guys</div>
+                <div>Siapa: hai guys</div>
+              </div>
+              <!-- Form input message -->
+              <div id="message-input" class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Your message...">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary" type="button" id="button-addon2">Submit</button>
                 </div>
+              </div>
             </div>
           </div>
         </div>
@@ -118,6 +175,11 @@
 <script>
 export default {
   name: 'Gameplay',
+  data () {
+    return {
+      isGameStarted: false
+    }
+  },
   methods: {
     gameStart () {
     }
