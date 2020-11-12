@@ -13,4 +13,8 @@
   color: #2c3e50;
   overflow-x: hidden;
 }
+
+::-webkit-scrollbar {
+  display: none;
+}
 </style>
