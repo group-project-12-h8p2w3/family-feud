@@ -5,11 +5,6 @@
         <div class="col-7 d-flex flex-column justify-content-center gameboard-side">
           <div class="card shadow gameboard">
             <div class="card-body">
-              <!-- Trigger Play Button -->
-              <div id="btn-trigger-play">
-                <button @click.prevent="gameStart" type="button" class="btn btn-info">Trigger Start Play</button>
-                <hr>
-              </div>
               <!-- Timer -->
               <div class="card shadow timer">
                 <div class="card-body">
@@ -22,6 +17,10 @@
                 </div>
               </div>
               <div class="gameboard-main">
+                  <!-- Trigger Play Button -->
+                <div v-if="!canPlay" id="btn-trigger-play">
+                  <button @click.prevent="gameStart" type="button" class="btn btn-info">Play</button>
+                </div>
                 <!-- Question -->
                 <div id="question">
                   <h3>{{ question }}</h3>
@@ -52,9 +51,6 @@
                   aria-label="Recipient's username"
                   aria-describedby="button-addon2">
                 </form>
-                <!-- <div class="input-group-append">
-                  <button @click.prevent="inputAnswer" class="btn btn-outline-secondary" type="button" id="button-addon2">Submit</button>
-                </div> -->
               </div>
             </div>
           </div>
@@ -112,11 +108,6 @@ export default {
       inputanswer: ''
     }
   },
-  // beforedEnter: {
-  //   gameCheck () {
-  //     this.gameStart()
-  //   }
-  // },
   methods: {
     gameStart () {
       if (!this.canPlay) {
@@ -157,7 +148,6 @@ export default {
   },
   computed: {
     usersPlaying () {
-      // ambil score semua user
       return this.$store.state.scores
     },
     question () {
@@ -196,7 +186,7 @@ export default {
 }
 
 .gameboard-main {
-  height: 50vh;
+  height: 56vh;
 }
 
 .timer {
@@ -230,9 +220,5 @@ export default {
 #message-board {
   margin-top: 16px;
   border-radius: 10px !important;
-}
-
-.chatBackground {
-  background-color: greenyellow;
 }
 </style>
