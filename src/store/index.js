@@ -9,7 +9,7 @@ export default new Vuex.Store({
     user: '', // username user ini
     users: [], // data user di waiting room
     scores: [],
-    questions: [],
+    questions: '',
     answers: [],
     messages: [],
     answered: [],
@@ -35,10 +35,16 @@ export default new Vuex.Store({
     },
     SOCKET_compareAnswer (state, data) {
       if (data.isTrue) {
-        state.answered.push(state.answers[data.index])
+        let score
+        state.answers.forEach(el => {
+          if (el.id === data.id) {
+            state.answered.push(el)
+            score = el.point
+          }
+        })
         state.scores.forEach(el => {
           if (el.username === data.user) {
-            el.score += state.answers[data.index].point
+            el.score += score
           }
         })
       }

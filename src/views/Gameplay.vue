@@ -24,28 +24,21 @@
               <div class="gameboard-main">
                 <!-- Question -->
                 <div id="question">
-                  <p>Question:</p>
                   <h3>{{ question }}</h3>
                   <hr>
                 </div>
                 <!-- Answer list -->
-                <div class="" id="answer">
-                  <table class="table table-bordered" style="margin: auto; width: 50%;">
-                    <col style="width: 8em;" />
-                    <col style="width: 1em;" />
-                    <thead>
-                      <tr>
-                        <th colspan="2">Answers</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr v-for="el in answer" :key="el.id">
-                        <td>{{ el.answer }}</td>
-                        <td>{{ el.point }}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <hr>
+                <div v-if="question" class="answer-part">
+                  <h3>Answers</h3>
+                  <div class="answer-content d-flex flex-column justify-content-center flex-wrapper">
+                    <div class="align-self-center">
+                      <Answer
+                      v-for="answer in answers"
+                      :key="answer.id"
+                      :answer="answer"
+                      ></Answer>
+                    </div>
+                  </div>
                 </div>
               </div>
               <!-- Answer Input -->
@@ -107,8 +100,13 @@
 </template>
 
 <script>
+import Answer from '../components/Answer.vue'
+
 export default {
   name: 'Gameplay',
+  components: {
+    Answer
+  },
   data () {
     return {
       inputanswer: ''
@@ -171,8 +169,11 @@ export default {
     user () {
       return this.$store.state.user
     },
-    answer () {
+    answered () {
       return this.$store.state.answered
+    },
+    answers () {
+      return this.$store.state.answers
     },
     time () {
       return this.$store.state.time
@@ -201,6 +202,10 @@ export default {
 .timer {
   width: 8vw;
   border-radius: 10px !important;
+}
+
+#question {
+  margin-top: 16px;
 }
 
 .scoreboard-card {
