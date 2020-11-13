@@ -17,7 +17,7 @@
                     Timer:
                   </div>
                   <div>
-                    50
+                    {{time}}
                   </div>
                 </div>
               </div>
@@ -145,6 +145,7 @@ export default {
   methods: {
     gameStart () {
       this.$socket.emit('fetchQuestion')
+      this.timer()
     },
     sendMessage () {
       const data = {
@@ -162,6 +163,24 @@ export default {
       }
       this.$socket.emit('compareAnswer', data)
       this.inputanswer = ''
+    },
+    timer () {
+      const gameTime = setInterval(() => {
+        if (!this.question) {
+          clearInterval(gameTime)
+          this.$socket.emit('resetTimer')
+        } else if (this.time <= 0) {
+          clearInterval(gameTime)
+          this.$socket.emit('resetTimer')
+          this.getQuestion()
+        } else {
+          this.$socket.emit('timer')
+        }
+      }, 1000)
+    },
+    getQuestion () {
+      this.$socket.emit('getQuestion')
+      this.timer()
     }
   },
   computed: {
@@ -180,6 +199,9 @@ export default {
     },
     answer () {
       return this.$store.state.answered
+    },
+    time () {
+      return this.$store.state.time
     }
   }
 }
