@@ -12,7 +12,8 @@ export default new Vuex.Store({
     questions: [],
     answers: [],
     messages: [],
-    answered: []
+    answered: [],
+    time: 10
   },
   mutations: {
     SOCKET_userLogin (state, data) {
@@ -24,6 +25,7 @@ export default new Vuex.Store({
       router.push('/gameplay')
     },
     SOCKET_questionsList (state, data) {
+      state.answered = []
       state.answers = data.answer
       state.questions = data.question
     },
@@ -39,6 +41,9 @@ export default new Vuex.Store({
           }
         })
       }
+    },
+    SOCKET_fetchTime (state, data) {
+      state.time = data
     }
   },
   actions: {
