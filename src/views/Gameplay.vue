@@ -111,14 +111,22 @@ export default {
   name: 'Gameplay',
   data () {
     return {
-      isGameStarted: false,
       inputanswer: ''
     }
   },
+  // beforedEnter: {
+  //   gameCheck () {
+  //     this.gameStart()
+  //   }
+  // },
   methods: {
     gameStart () {
-      this.$socket.emit('fetchQuestion')
-      this.timer()
+      if (!this.canPlay) {
+        this.$socket.emit('fetchQuestion')
+        this.timer()
+      } else {
+        this.$router.push('/rooms')
+      }
     },
     inputAnswer () {
       const user = localStorage.getItem('user')
@@ -134,6 +142,7 @@ export default {
         if (!this.question) {
           clearInterval(gameTime)
           this.$socket.emit('resetTimer')
+          this.$socket.emit('finish')
         } else if (this.time <= 0) {
           clearInterval(gameTime)
           this.$socket.emit('resetTimer')
@@ -167,6 +176,9 @@ export default {
     },
     time () {
       return this.$store.state.time
+    },
+    canPlay () {
+      return this.$store.state.isPlay
     }
   }
 }
