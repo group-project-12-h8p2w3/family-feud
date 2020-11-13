@@ -42,17 +42,19 @@
                 </div>
               </div>
               <!-- Answer Input -->
-              <div class="input-group mb-3">
-                <input
-                @submit="inputAnswer"
-                v-model="inputanswer"
-                type="text" class="form-control"
-                placeholder="Your answer..."
-                aria-label="Recipient's username"
-                aria-describedby="button-addon2">
-                <div class="input-group-append">
+              <div>
+                <form @submit.prevent="inputAnswer">
+                  <input
+                  @submit="inputAnswer"
+                  v-model="inputanswer"
+                  type="text" class="form-control w-100"
+                  placeholder="Your answer..."
+                  aria-label="Recipient's username"
+                  aria-describedby="button-addon2">
+                </form>
+                <!-- <div class="input-group-append">
                   <button @click.prevent="inputAnswer" class="btn btn-outline-secondary" type="button" id="button-addon2">Submit</button>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>
@@ -76,30 +78,6 @@
                             </td>
                             <td class="align-middle">{{ user.score }}</td>
                           </tr>
-                          <tr>
-                            <td>Halo</td>
-                            <td>0</td>
-                          </tr>
-                          <tr>
-                            <td>Halo</td>
-                            <td>0</td>
-                          </tr>
-                          <tr>
-                            <td>Halo</td>
-                            <td>0</td>
-                          </tr>
-                          <tr>
-                            <td>Halo</td>
-                            <td>0</td>
-                          </tr>
-                          <tr>
-                            <td>Halo</td>
-                            <td>0</td>
-                          </tr>
-                          <tr>
-                            <td>Halo</td>
-                            <td>0</td>
-                          </tr>
                         </table>
                       </div>
                     </div>
@@ -108,13 +86,9 @@
               </div>
               <!-- chat board -->
               <div class="border p-2 text-left" id="message-board" style="overflow: auto;  height: 30vh;">
-                <div>
-                  <img class="user-avatar-scoreboard" :src="`https://avatars.dicebear.com/api/bottts/${user.username}.svg`" alt="user-avatar">
-                  <span> : hai guys</span>
-                </div>
-                <div>
-                  <img class="user-avatar-scoreboard" :src="`https://avatars.dicebear.com/api/bottts/sasasa.svg`" alt="user-avatar">
-                  <span> : hai</span>
+                <div v-for="(message, i) in messages" :key="i">
+                  <img class="user-avatar-scoreboard" :src="`https://avatars.dicebear.com/api/bottts/${message.user}.svg`" alt="user-avatar">
+                  <span> : {{message.answer}}</span>
                 </div>
               </div>
             </div>
@@ -135,23 +109,22 @@ export default {
   },
   data () {
     return {
-      message: '',
-      isGameStarted: false,
       inputanswer: ''
     }
   },
+  // beforedEnter: {
+  //   gameCheck () {
+  //     this.gameStart()
+  //   }
+  // },
   methods: {
     gameStart () {
-      this.$socket.emit('fetchQuestion')
-      this.timer()
-    },
-    sendMessage () {
-      const data = {
-        user: localStorage.getItem('user'),
-        message: this.message
+      if (!this.canPlay) {
+        this.$socket.emit('fetchQuestion')
+        this.timer()
+      } else {
+        this.$router.push('/rooms')
       }
-      this.$socket.emit('sendMessage', data)
-      this.message = ''
     },
     inputAnswer () {
       const user = localStorage.getItem('user')
@@ -167,6 +140,7 @@ export default {
         if (!this.question) {
           clearInterval(gameTime)
           this.$socket.emit('resetTimer')
+          this.$socket.emit('finish')
         } else if (this.time <= 0) {
           clearInterval(gameTime)
           this.$socket.emit('resetTimer')
@@ -203,6 +177,9 @@ export default {
     },
     time () {
       return this.$store.state.time
+    },
+    canPlay () {
+      return this.$store.state.isPlay
     }
   }
 }
@@ -253,5 +230,9 @@ export default {
 #message-board {
   margin-top: 16px;
   border-radius: 10px !important;
+}
+
+.chatBackground {
+  background-color: greenyellow;
 }
 </style>

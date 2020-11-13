@@ -13,7 +13,8 @@ export default new Vuex.Store({
     answers: [],
     messages: [],
     answered: [],
-    time: 10
+    time: 20,
+    isPlay: false
   },
   mutations: {
     SOCKET_userLogin (state, data) {
@@ -50,6 +51,9 @@ export default new Vuex.Store({
     },
     SOCKET_fetchTime (state, data) {
       state.time = data
+    },
+    SOCKET_gameStart (state, data) {
+      state.canStart = data
     }
   },
   actions: {
