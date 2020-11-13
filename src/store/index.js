@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import router from '../router/index'
+import swal from 'sweetalert'
 
 Vue.use(Vuex)
 
@@ -29,6 +30,26 @@ export default new Vuex.Store({
       state.answered = []
       state.answers = data.answer
       state.questions = data.question
+      state.isPlay = true
+      let user = ''
+      let max = 0
+      state.scores.forEach(el => {
+        if (el.score > max) {
+          max = el.score
+          user = el.username
+        }
+      })
+      if (!data.question) {
+        swal({
+          title: 'Congrats!',
+          text: `winner: ${user}`,
+          icon: 'success',
+          button: 'Back to home'
+        })
+          .then((value) => {
+            router.push('/')
+          })
+      }
     },
     SOCKET_messages (state, data) {
       state.messages = data
@@ -53,6 +74,9 @@ export default new Vuex.Store({
       state.time = data
     },
     SOCKET_gameStart (state, data) {
+      state.messages = []
+      state.answered = []
+      state.isPlay = false
       state.canStart = data
     }
   },
