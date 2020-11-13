@@ -45,8 +45,8 @@ export default {
   .welcome-card {
     box-shadow: 0px 3px 15px rgba(0,0,0,0.4);
     border-radius: 25px !important;
-    width: 50vw;
-    height: 55vh;
+    width: 48vw;
+    height: 60vh;
   }
   .welcome-card-body {
     margin: auto;

@@ -8,24 +8,22 @@
         </div>
       </div>
       <div class="col-7 d-flex flex-column justify-content-center">
-        <div class="align-self-center">
-          <div class="card rooms-card">
-            <div class="card-body d-flex flex-column justify-content-center">
-              <div class="align-self-center">
-                <h1>Players</h1>
-                <div class="player-container scrollable d-flex flex-wrap">
-                  <div v-for="(user, i) in users" :key="i" class="card player-card">
-                    <div class="card-body d-flex flex-column justify-content-center">
-                      <div class="align-self-center">
-                        <img class="user-avatar" :src="`https://avatars.dicebear.com/api/bottts/${user}.svg`" alt="">
-                        <h5 class="username-card">{{ user }}</h5>
-                      </div>
+        <div class="card rooms-card">
+          <div class="card-body d-flex flex-column justify-content-center">
+            <div class="align-self-center">
+              <h1>Players</h1>
+              <div class="player-container scrollable d-flex flex-wrap">
+                <div v-for="(user, i) in users" :key="i" class="card player-card">
+                  <div class="card-body d-flex flex-column justify-content-center">
+                    <div class="align-self-center">
+                      <img class="user-avatar" :src="`https://avatars.dicebear.com/api/bottts/${user}.svg`" alt="user-avatar">
+                      <h5 class="username-card">{{ user }}</h5>
                     </div>
                   </div>
                 </div>
-                <button v-if="!isStart" @click="play" class="play-btn">Play</button>
-                <h5 v-if="isStart" class="waiting-info text-muted">Current game is running please wait until it ended</h5>
               </div>
+              <button v-if="!isStart" @click="play" class="play-btn">Play</button>
+              <h5 v-if="isStart" class="waiting-info text-muted">Current game is running please wait until it ended</h5>
             </div>
           </div>
         </div>
@@ -70,7 +68,7 @@ export default {
   }
 
   .rooms-card {
-    width: 45vw;
+    width: 50vw;
     height: 60vh;
     box-shadow: 0px 3px 15px rgba(0,0,0,0.4);
     border-radius: 25px !important;

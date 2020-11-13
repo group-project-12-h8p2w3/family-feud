@@ -1,15 +1,9 @@
 <template>
   <div class="gameplay">
-    <nav class="navbar navbar-light bg-light">
-      <span class="navbar-brand mb-0 h1">Family-feud</span>
-    </nav>
     <div class="container-fluid">
       <div class="row justify-content-center">
-        <div class="col-7">
-          <div class="card shadow">
-            <div class="card-header">
-              Gameboard
-            </div>
+        <div class="col-7 d-flex flex-column justify-content-center gameboard-side">
+          <div class="card shadow gameboard">
             <div class="card-body">
               <!-- Trigger Play Button -->
               <div id="btn-trigger-play">
@@ -17,39 +11,42 @@
                 <hr>
               </div>
               <!-- Timer -->
-              <div id="timer-gameplay">
-                <div>
-                  Timer:
+              <div class="card shadow timer">
+                <div class="card-body">
+                  <div>
+                    Timer:
+                  </div>
+                  <div>
+                    50
+                  </div>
                 </div>
-                <div>
-                  50
+              </div>
+              <div class="gameboard-main">
+                <!-- Question -->
+                <div id="question">
+                  <p>Question:</p>
+                  <h3>{{ question }}</h3>
+                  <hr>
                 </div>
-                <hr>
-              </div>
-              <!-- Question -->
-              <div id="question">
-                <p>Question:</p>
-                <h3>{{ question }}</h3>
-                <hr>
-              </div>
-              <!-- Answer list -->
-              <div class="" id="answer">
-                <table class="table table-bordered" style="margin: auto; width: 50%;">
-                  <col style="width: 8em;" />
-                  <col style="width: 1em;" />
-                  <thead>
-                    <tr>
-                      <th colspan="2">Answers</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr v-for="el in answer" :key="el.id">
-                      <td>{{ el.answer }}</td>
-                      <td>{{ el.point }}</td>
-                    </tr>
-                  </tbody>
-                </table>
-                <hr>
+                <!-- Answer list -->
+                <div class="" id="answer">
+                  <table class="table table-bordered" style="margin: auto; width: 50%;">
+                    <col style="width: 8em;" />
+                    <col style="width: 1em;" />
+                    <thead>
+                      <tr>
+                        <th colspan="2">Answers</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="el in answer" :key="el.id">
+                        <td>{{ el.answer }}</td>
+                        <td>{{ el.point }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <hr>
+                </div>
               </div>
               <!-- Answer Input -->
               <div class="input-group mb-3">
@@ -67,54 +64,64 @@
             </div>
           </div>
         </div>
-        <div class="col-3">
-          <div class="card shadow">
-            <div class="card-header">
-              <h5 class="card-title">{{ user }}</h5>
-            </div>
+        <div class="col-3 d-flex flex-column justify-content-center gameboard-side">
+          <div class="card shadow gameboard">
             <div class="card-body">
               <div>
-                <div id="userScoreBoard">
-                User score:
-                <h3>50</h3>
-              </div>
-              <hr>
-              <div id="otherPlayers">
-                <table class="table table-bordered" style="font-size: 0.8em;">
-                  <col style="width: 8em;" />
-                  <col style="width: 1em;" />
-                  <col style="width: 1em;" />
-                  <tr v-for="(user, i) in usersPlaying" :key="i">
-                    <td>{{ user.username }}</td>
-                    <td>:</td>
-                    <td>{{ user.score }}</td>
-                  </tr>
-                </table>
-              </div>
+                <div class="scoreboard">
+                  <div class="card scoreboard-card">
+                    <div class="card-body">
+                      <h3>Scoreboard</h3>
+                      <div class="scoreboard-table">
+                        <table class="table table-bordered" style="font-size: 0.8em;">
+                          <col style="width: 9em;" />
+                          <col style="width: 1em;" />
+                          <tr v-for="(user, i) in usersPlaying" :key="i">
+                            <td class="align-middle text-left">
+                              <img class="user-avatar-scoreboard" :src="`https://avatars.dicebear.com/api/bottts/${user.username}.svg`" alt="user-avatar">
+                              <span class="username-scoreboard"> {{ user.username }}</span>
+                            </td>
+                            <td class="align-middle">{{ user.score }}</td>
+                          </tr>
+                          <tr>
+                            <td>Halo</td>
+                            <td>0</td>
+                          </tr>
+                          <tr>
+                            <td>Halo</td>
+                            <td>0</td>
+                          </tr>
+                          <tr>
+                            <td>Halo</td>
+                            <td>0</td>
+                          </tr>
+                          <tr>
+                            <td>Halo</td>
+                            <td>0</td>
+                          </tr>
+                          <tr>
+                            <td>Halo</td>
+                            <td>0</td>
+                          </tr>
+                          <tr>
+                            <td>Halo</td>
+                            <td>0</td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
               <!-- chat board -->
-              <div class="border p-2 text-left" id="message-board" style="overflow: auto;  height: 20vh;">
-                <div>Siapa: hai guys</div>
-                <div>Siapa: hai guys</div>
-                <div>Siapa: hai guys</div>
-                <div>Siapa: hai guys</div>
-                <div>Siapa: hai guys</div>
-                <div>Siapa: hai guys</div>
-                <div>Siapa: hai guys</div>
-                <div>Siapa: hai guys</div>
-                <div>Siapa: hai guys</div>
-                <div>Siapa: hai guys</div>
-                <div>Siapa: hai guys</div>
-                <div>Siapa: hai guys</div>
-                <div>Siapa: hai guys</div>
-                <div>Siapa: hai guys</div>
-                <div>Siapa: hai guys</div>
-              </div>
-              <!-- Form input message -->
-              <div id="message-input" class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Your message...">
-                <div class="input-group-append">
-                  <button class="btn btn-outline-secondary" type="button" id="button-addon2">Submit</button>
+              <div class="border p-2 text-left" id="message-board" style="overflow: auto;  height: 30vh;">
+                <div>
+                  <img class="user-avatar-scoreboard" :src="`https://avatars.dicebear.com/api/bottts/${user.username}.svg`" alt="user-avatar">
+                  <span> : hai guys</span>
+                </div>
+                <div>
+                  <img class="user-avatar-scoreboard" :src="`https://avatars.dicebear.com/api/bottts/sasasa.svg`" alt="user-avatar">
+                  <span> : hai</span>
                 </div>
               </div>
             </div>
@@ -179,5 +186,45 @@ export default {
 </script>
 
 <style>
+.gameboard-side {
+  min-height: 100vh;
+}
 
+.gameboard {
+  border-radius: 20px !important;
+  min-height: 80vh;
+}
+
+.gameboard-main {
+  height: 50vh;
+}
+
+.timer {
+  width: 8vw;
+  border-radius: 10px !important;
+}
+
+.scoreboard-card {
+  border-radius: 10px !important;
+  height: 40vh;
+}
+
+.scoreboard-table {
+  height: 30vh;
+  overflow-y: auto;
+}
+
+.user-avatar-scoreboard {
+  width: 2vw;
+}
+
+.username-scoreboard {
+  font-size: 1rem;
+  margin-left: 8px;
+}
+
+#message-board {
+  margin-top: 16px;
+  border-radius: 10px !important;
+}
 </style>
